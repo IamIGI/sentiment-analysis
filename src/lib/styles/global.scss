@@ -1,4 +1,4 @@
-@use "global.vars.scss" as *;
+@use 'global.vars.scss' as *;
 
 /* Reset basic browser styles */
 *,
@@ -16,7 +16,7 @@ body {
 }
 
 body {
-	font-family: "Lato", "Roboto", sans-serif;
+	font-family: 'Lato', 'Roboto', sans-serif;
 	line-height: 1.5;
 	scroll-behavior: smooth;
 	overflow-x: hidden;
