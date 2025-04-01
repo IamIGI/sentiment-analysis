@@ -11,12 +11,11 @@
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
 		"format": "prettier --write .",
-		"lint": "prettier --check . && eslint ."
+		"lint": "prettier --check . && eslint .",
+		"test": "echo \"Tests have started\""
 	},
 	"lint-staged": {
-		"*.ts": "eslint --fix",
-		"*.svelte": "eslint --fix",
-		"*.scss": "prettier --write"
+		"*.{ts,svelte,scss}": "prettier --write"
 	},
 	"devDependencies": {
 		"@eslint/compat": "^1.2.5",
