@@ -1,4 +1,5 @@
 <script lang="ts">
+	let text = 'elo';
 </script>
 
 <div class="wrapper">
