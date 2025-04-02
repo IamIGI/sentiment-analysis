@@ -21,7 +21,7 @@
 	};
 </script>
 
-<div class="border">
+<div class="border-wrapper">
 	<div class="container">
 		<img src={`${base}/svg/analysis.svg`} alt="analysis" class="svg-icon" />
 		<input type="text" bind:value={text} placeholder="Wprowadź tekst, sprawdź emocje" />
@@ -30,7 +30,7 @@
 </div>
 
 <style lang="scss">
-	.border {
+	.border-wrapper {
 		$borderRadius: 15px;
 		background: linear-gradient(to right, white, rgba(32, 32, 32));
 		border-radius: $borderRadius;
@@ -79,5 +79,7 @@
 		display: flex;
 		align-items: center;
 		justify-content: center;
+		background: linear-gradient(to right, rgb(229, 134, 19), rgb(30, 181, 158));
+		/* filter: brightness(0.9); */
 	}
 </style>

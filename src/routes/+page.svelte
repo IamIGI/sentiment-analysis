@@ -1,5 +1,16 @@
 <script lang="ts">
+	import ResultModal from '$lib/components/resultModal.svelte';
 	import TextAnalysis from '$lib/components/textAnalysis.svelte';
+	import { mount, unmount } from 'svelte';
+
+	const openModal = () => {
+		const closeModal = () => unmount(m);
+
+		const m = mount(ResultModal, {
+			target: document.body,
+			props: { result: 'neutral', closeModal }
+		});
+	};
 </script>
 
 <div class="wrapper">
@@ -7,6 +18,7 @@
 		<h1>Sprawdź sentyment swojego tekstu online</h1>
 		<h2>Analizuj emocje wprowadzonych zdań</h2>
 		<TextAnalysis />
+		<button onclick={openModal}>modal</button>
 	</div>
 </div>
 
@@ -35,6 +47,7 @@
 		display: flex;
 		flex-direction: column;
 		align-items: center;
+		text-align: center;
 		gap: 2rem;
 	}
 </style>

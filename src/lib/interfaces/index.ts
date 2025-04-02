@@ -8,3 +8,10 @@ export interface SentimentError {
 }
 
 export type SentimentResponse = { label: 'POSITIVE' | 'NEGATIVE'; score: number }[][];
+
+export interface AnalysisResultDesc {
+	iconName: string;
+	color: string;
+	title: string;
+	desc: string;
+}
