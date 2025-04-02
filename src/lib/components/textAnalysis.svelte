@@ -22,7 +22,7 @@
 </script>
 
 <div class="border">
-	<div class="wrapper">
+	<div class="container">
 		<img src={`${base}/svg/analysis.svg`} alt="analysis" class="svg-icon" />
 		<input type="text" bind:value={text} placeholder="Wprowadź tekst, sprawdź emocje" />
 		<AsyncButton {isLoading} class="async-button" onclick={submit}>Analizuj</AsyncButton>
@@ -38,8 +38,7 @@
 		min-width: 325px;
 		width: 80%;
 
-		.wrapper {
-			/* outline: 1px solid red; */
+		.container {
 			width: 100%;
 			height: 60px;
 			display: flex;
@@ -61,7 +60,6 @@
 	}
 	input {
 		height: 100%;
-		/* outline: 1px solid red; */
 		flex: 1;
 		background: transparent;
 		border: none;

@@ -2,7 +2,7 @@
 	import { base } from '$app/paths';
 	import '$lib/styles/global.scss';
 
-	const VIDEO_NAME = 'macos-colorful-wave.3840x2160.mp4';
+	const VIDEO_NAME = 'abstract-color-lines.1920x1080 (1).mp4';
 	let videoElement = $state<HTMLVideoElement>();
 	let { children } = $props();
 
@@ -11,9 +11,7 @@
 	}
 
 	function setPlaybackSpeed() {
-		if (videoElement) {
-			videoElement.playbackRate = 1;
-		}
+		if (videoElement) videoElement.playbackRate = 0.7;
 	}
 </script>
 
@@ -39,7 +37,7 @@
 
 <style lang="scss">
 	.wrapper {
-		border: 1px solid green;
+		/* border: 1px solid green; */
 		width: 100%;
 		height: 100%;
 		position: relative;
