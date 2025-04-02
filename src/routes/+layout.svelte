@@ -2,7 +2,7 @@
 	import { base } from '$app/paths';
 	import '$lib/styles/global.scss';
 
-	const VIDEO_NAME = 'white-triangles.3840x2160.mp4';
+	const VIDEO_NAME = 'macos-colorful-wave.3840x2160.mp4';
 	let videoElement = $state<HTMLVideoElement>();
 	let { children } = $props();
 

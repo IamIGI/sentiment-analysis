@@ -6,6 +6,7 @@
 	<div class="container">
 		<h1>Sprawdź sentyment swojego tekstu online</h1>
 		<h2>Analizuj emocje wprowadzonych zdań</h2>
+
 		<TextAnalysis />
 	</div>
 </div>
@@ -15,15 +16,16 @@
 		height: 100%;
 		margin: auto;
 		padding-top: 27vh;
+
+		h1 {
+			font-family: 'Playfair Display', serif;
+		}
 	}
 
 	.container {
-		border: none;
-		background-color: var(--main-background-color);
-		$backgroundColor: rgba(115, 112, 112, 0.95);
-		$backgroundColor: rgba(241, 240, 240, 0.95);
+		$backgroundColor: rgba(32, 32, 32, 0.9);
 		background-color: $backgroundColor;
-		box-shadow: 0 0 7rem 9rem $backgroundColor;
+		box-shadow: 0 0 7rem 8rem $backgroundColor;
 		border-radius: 3rem;
 		width: fit-content;
 		margin: auto;
@@ -33,10 +35,5 @@
 		flex-direction: column;
 		align-items: center;
 		gap: 2rem;
-		color: black;
-
-		h1 {
-			font-family: 'Playfair Display', serif;
-		}
 	}
 </style>

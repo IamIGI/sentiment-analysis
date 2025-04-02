@@ -21,43 +21,36 @@
 	};
 </script>
 
-<div class="wrapper">
-	<img src={`${base}/svg/analysis.svg`} alt="analysis" class="svg-icon" />
-	<input type="text" bind:value={text} placeholder="Wprowadź tekst, sprawdź emocje" />
-	<AsyncButton {isLoading} class="async-button" onclick={submit}>Analizuj</AsyncButton>
+<div class="border">
+	<div class="wrapper">
+		<img src={`${base}/svg/analysis.svg`} alt="analysis" class="svg-icon" />
+		<input type="text" bind:value={text} placeholder="Wprowadź tekst, sprawdź emocje" />
+		<AsyncButton {isLoading} class="async-button" onclick={submit}>Analizuj</AsyncButton>
+	</div>
 </div>
 
 <style lang="scss">
-	.wrapper {
-		/* outline: 1px solid red; */
+	.border {
+		$borderRadius: 15px;
+		background: linear-gradient(to right, white, rgba(32, 32, 32));
+		border-radius: $borderRadius;
 		max-width: 800px;
 		min-width: 325px;
 		width: 80%;
-		height: 60px;
-		display: flex;
-		align-items: center;
-		gap: 1rem;
-		background: var(--main-input-color);
-		border-radius: 20px;
-		padding: 0 15px;
-		position: relative;
-		box-sizing: border-box;
-		$border: 2px;
-		background-clip: padding-box;
-		border: solid $border transparent;
-		border-radius: 1em;
 
-		&:before {
-			content: '';
-			position: absolute;
-			top: 0;
-			left: 0;
-			right: 0;
-			bottom: 0;
-			z-index: -1;
-			margin: -$border;
-			border-radius: inherit;
-			background: linear-gradient(to right, #555, #222);
+		.wrapper {
+			/* outline: 1px solid red; */
+			width: 100%;
+			height: 60px;
+			display: flex;
+			align-items: center;
+			gap: 1rem;
+			background: var(--main-input-color);
+			border-radius: calc($borderRadius + 1px);
+			padding: 0 15px;
+			color: #fff;
+			background-clip: padding-box;
+			border: solid 1px transparent;
 		}
 	}
 
@@ -72,17 +65,9 @@
 		flex: 1;
 		background: transparent;
 		border: none;
-		/* color: #ccc; */
-		color: #000;
-		color: #e4dede; // Change this to any color you want
+		color: #ccc;
 		font-size: var(--font-size-p);
 		padding-right: 5px;
-
-		&::placeholder {
-			color: #d6d3d3; // Change this to any color you want
-			font-weight: 700;
-			opacity: 1; // Ensure full visibility (some browsers lower opacity)
-		}
 	}
 
 	:global(.async-button) {
