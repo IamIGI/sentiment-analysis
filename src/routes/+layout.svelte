@@ -1,10 +1,11 @@
 <script lang="ts">
 	import { base } from '$app/paths';
 	import '$lib/styles/global.scss';
-
 	const VIDEO_NAME = 'abstract-color-lines.1920x1080 (1).mp4';
-	let videoElement = $state<HTMLVideoElement>();
+
 	let { children } = $props();
+
+	let videoElement = $state<HTMLVideoElement>();
 
 	function preventContextMenu(event: MouseEvent) {
 		event.preventDefault(); // Disable right-click and context menu
