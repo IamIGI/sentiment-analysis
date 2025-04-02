@@ -1,53 +1,40 @@
 <script lang="ts">
-	import apiConfig from '$lib/api/api.config';
-	import type { SentimentError, SentimentResponse } from '$lib/interfaces';
-	import appUtils from '$lib/utils/app.utils';
-
-	let text = $state<string>();
-	let result = $state<string>();
-
-	const submit = async () => {
-		if (!text) return;
-		const response = await apiConfig.submitSentiment(text);
-
-		if ((response as SentimentError).error) {
-			result = (response as SentimentError).error;
-		}
-
-		result = appUtils.getSentimentAnalysis(response as SentimentResponse);
-	};
+	import TextAnalysis from '$lib/components/textAnalysis.svelte';
 </script>
 
 <div class="wrapper">
-	<h1>Sentiment Analysis</h1>
-	<input type="text" bind:value={text} placeholder="Enter a phrase" required />
-	<button onclick={submit}>Submit</button>
-	{#if result}
-		<p>{result}</p>
-	{/if}
+	<div class="container">
+		<h1>Sprawdź sentyment swojego tekstu online</h1>
+		<h2>Analizuj emocje wprowadzonych zdań</h2>
+		<TextAnalysis />
+	</div>
 </div>
 
 <style lang="scss">
 	.wrapper {
-		width: 800px;
-		margin: 0 auto;
+		height: 100%;
+		margin: auto;
+		padding-top: 29vh;
+
+		h1 {
+			font-family: 'Playfair Display', serif;
+		}
+	}
+
+	.container {
+		/* outline: 1px solid red; */
+
+		$backgroundColor: rgba(black, 0.7);
+		$backgroundColor: rgba(rgb(12, 12, 12), 0.7);
+		background-color: $backgroundColor;
+		box-shadow: 0 0 7rem 8rem $backgroundColor;
+		border-radius: 3rem;
+		width: fit-content;
+		margin: auto;
+		padding: 4rem 3rem 3rem 3rem;
 		display: flex;
 		flex-direction: column;
 		align-items: center;
-	}
-
-	input {
-		margin-bottom: 10px;
-		padding: 8px;
-		width: 100%;
-		max-width: 400px;
-	}
-	button {
-		padding: 8px 16px;
-		cursor: pointer;
-	}
-	p {
-		margin-top: 20px;
-		font-size: 1.2em;
+		gap: 2rem;
 	}
 </style>
