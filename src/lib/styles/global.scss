@@ -22,13 +22,14 @@ body {
 	overflow-x: hidden;
 	color: var(--main-text-color);
 	background-color: var(--main-background-color);
+	// background-color: red;
 }
 
 input,
 textarea {
 	outline: none;
 	border: none;
-	background-color: var(--main-second-color);
+	background-color: var(--main-input-color);
 	color: var(--main-text-color);
 	padding-left: 0.6rem;
 }
@@ -87,16 +88,13 @@ p {
 li {
 	font-size: var(--font-size-li);
 }
-
-.svg-icon {
-	//https://codepen.io/sosuke/pen/Pjoqqp
-	filter: var(--main-svg-filter);
-}
-
 button {
 	cursor: pointer;
 	outline: none;
 	border: none;
+
+	background-color: var(--main-accent-color);
+	color: var(--main-text-color);
 
 	&:disabled {
 		filter: brightness(0.5);
