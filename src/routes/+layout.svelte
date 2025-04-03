@@ -38,7 +38,7 @@
 
 <style lang="scss">
 	.wrapper {
-		/* border: 1px solid green; */
+		border: 1px solid green;
 		width: 100%;
 		height: 100%;
 		position: relative;
@@ -53,8 +53,6 @@
 			object-fit: cover; // Ensures the video covers the entire section
 			z-index: -1; // Pushes the video behind content
 
-			// Add a filter to make the video darker
-			/* filter: brightness(1) contrast(1.2); // Adjust values to your preference */
 			filter: brightness(1); // Adjust values to your preference
 
 			/* Optional: Hide fullscreen button on iOS and mobile browsers */

@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { base } from '$app/paths';
-
 	import Modal from './modal.svelte';
 	import type { AnalysisResultDesc, ResultCategoryEnum } from '$lib/interfaces';
 	import textAnalysisResults from '$lib/constants/textAnalysisResults';
@@ -52,12 +51,19 @@
 		transition:scale={{ start: 2, duration: MOUNT_DURATION }}
 	>
 		<div class="container">
-			<h2 class="title">Twoja analiza jest gotowa! Oto wyniki:</h2>
+			<h2 class="title">Twoja analiza jest gotowa!</h2>
 
 			<div class="result">
 				<img src={`${base}/svg/${analysisResultDesc.iconName}`} alt="result" class="svg-icon" />
 				<div class="result-desc">
-					<h2 style="color: {analysisResultDesc.color}">{analysisResultDesc.title}</h2>
+					<h2 style="color: {analysisResultDesc.color}">
+						{analysisResultDesc.title}
+						<img
+							src={`${base}/svg/${analysisResultDesc.iconName}`}
+							alt="result"
+							class="svg-icon-mobile"
+						/>
+					</h2>
 					<p>Wynik: <span style="color: {analysisResultDesc.color}">{score}</span></p>
 					<p>{@html analysisResultDesc.desc}</p>
 				</div>
@@ -106,11 +112,9 @@
 		margin: 1rem 0;
 		display: flex;
 		gap: 2rem;
-
 		.result-desc {
 			p {
 				margin: 5px 0;
-
 				&:first-of-type {
 					font-weight: 700;
 				}
@@ -124,7 +128,12 @@
 		height: $size;
 		width: $size;
 	}
-
+	.svg-icon-mobile {
+		$size: 30px;
+		height: $size;
+		width: $size;
+		display: none;
+	}
 	button {
 		background-color: red;
 		color: white;
@@ -135,5 +144,77 @@
 		font-size: var(--font-size-p);
 		font-weight: 700;
 		text-transform: uppercase;
+	}
+
+	@media (max-width: 700px) {
+		$width: 80vw;
+		$height: 350px;
+		$border: 5px;
+		.border-wrapper {
+			width: $width;
+			height: $height;
+			.container {
+				width: calc($width - $border);
+				height: calc($height - $border);
+			}
+		}
+
+		.result {
+			/* outline: 1px solid red; */
+			margin: 1rem 0;
+
+			gap: 1rem;
+		}
+
+		.svg-icon {
+			$size: 45px;
+			height: $size;
+			width: $size;
+		}
+	}
+
+	@media (max-width: 500px) {
+		$height: 400px;
+		$border: 5px;
+		.border-wrapper {
+			height: $height;
+			.container {
+				height: calc($height - $border);
+			}
+		}
+		.result-desc h2 {
+			font-size: 20px;
+			width: fit-content;
+			display: flex;
+			justify-content: flex-start;
+			align-items: center;
+			gap: 1rem;
+		}
+		.svg-icon-mobile {
+			display: block;
+		}
+		.svg-icon {
+			display: none;
+		}
+	}
+
+	@media (max-width: 400px) {
+		$height: 430px;
+		$border: 5px;
+		.border-wrapper {
+			height: $height;
+			.container {
+				height: calc($height - $border);
+			}
+		}
+
+		.result-desc h2 {
+			font-size: 18px;
+			width: fit-content;
+			display: flex;
+			justify-content: flex-start;
+			align-items: center;
+			gap: 1rem;
+		}
 	}
 </style>
