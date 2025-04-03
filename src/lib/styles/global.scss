@@ -97,7 +97,7 @@ button {
 	color: var(--main-text-color);
 
 	&:disabled {
-		filter: brightness(0.5);
+		filter: brightness(0.7);
 	}
 	&:not(:disabled):hover {
 		filter: brightness(1.1);

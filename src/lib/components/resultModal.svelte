@@ -25,15 +25,22 @@
 		}
 	}
 
+	function handleKeyPress(event: KeyboardEvent) {
+		if (event.key === 'Escape' || event.key === 'Enter') {
+			onModalClose();
+		}
+	}
+
 	onMount(() => {
-		onMountTimer = setTimeout(
-			() => document.addEventListener('click', handleClickOutside),
-			MOUNT_DURATION
-		);
+		onMountTimer = setTimeout(() => {
+			document.addEventListener('click', handleClickOutside);
+			document.addEventListener('keydown', handleKeyPress);
+		}, MOUNT_DURATION);
 	});
 
 	onDestroy(() => {
 		document.removeEventListener('click', handleClickOutside);
+		document.removeEventListener('keydown', handleKeyPress);
 		clearTimeout(onMountTimer);
 	});
 </script>
