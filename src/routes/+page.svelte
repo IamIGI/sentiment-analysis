@@ -5,9 +5,9 @@
 	import { mount, unmount } from 'svelte';
 
 	const openResultModal = (data: SentimentAnalysis) => {
-		const closeModal = () => unmount(m);
+		const closeModal = () => unmount(resultModal);
 
-		const m = mount(ResultModal, {
+		const resultModal = mount(ResultModal, {
 			target: document.body,
 			props: { result: data.resultCategory, score: data.score, onModalClose: closeModal }
 		});
