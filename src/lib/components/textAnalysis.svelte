@@ -4,6 +4,7 @@
 	import type { SentimentAnalysis, SentimentError, SentimentResponse } from '$lib/interfaces';
 	import appUtils from '$lib/utils/app.utils';
 	import AsyncButton from './asyncButton.svelte';
+	import CustomTextarea from './customTextarea.svelte';
 
 	interface Props {
 		onResult: (data: SentimentAnalysis) => void;
@@ -13,10 +14,10 @@
 	let text = $state<string>('');
 	let error = $state<string>('');
 	let isLoading = $state<boolean>(false);
-	let textAreaRef = $state<HTMLTextAreaElement>();
 
 	const submit = async () => {
 		if (!text) return;
+		//loading
 		isLoading = true;
 		const response = await apiConfig.submitSentiment(text);
 
@@ -32,19 +33,9 @@
 		isLoading = false;
 	};
 
-	const adjustHeight = () => {
-		if (!textAreaRef) return;
-		textAreaRef.style.height = 'auto'; // Reset height to auto to allow for re-calculation
-		textAreaRef.style.height = `${textAreaRef.scrollHeight}px`; // Set the height based on scrollHeight
-	};
-
-	const trimExtraCharacters = () => {
-		if (text.length > 500) {
-			text = text.slice(0, 500); // Trim extra characters
-		}
-	};
-	const removeErrorMsg = () => {
+	const onTextUpdate = (updatedText: string) => {
 		if (error.length > 0) error = '';
+		text = updatedText;
 	};
 </script>
 
@@ -52,30 +43,7 @@
 	<div class="gradient-border">
 		<div class="container">
 			<img src={`${base}/svg/analysis.svg`} alt="analysis" class="svg-icon" />
-
-			<div class="textarea-wrapper">
-				<textarea
-					placeholder="Wprowadź tekst, sprawdź emocje"
-					bind:this={textAreaRef}
-					bind:value={text}
-					oninput={() => {
-						removeErrorMsg();
-						trimExtraCharacters();
-						adjustHeight();
-					}}
-					onkeydown={(e) => {
-						if (e.key === 'Enter') {
-							if (e.shiftKey) return;
-							// Enter alone = Submit
-							e.preventDefault();
-							submit();
-						}
-					}}
-				>
-				</textarea>
-				<span class="char-counter" class:char-limit={text.length === 500}>{text.length} / 500</span>
-			</div>
-
+			<CustomTextarea onTextChange={onTextUpdate} onSubmit={submit} />
 			<AsyncButton
 				{isLoading}
 				class="async-button"
@@ -131,41 +99,6 @@
 		width: $size;
 	}
 
-	.textarea-wrapper {
-		/* outline: 1px solid blue; */
-		position: relative;
-		width: 100%;
-	}
-
-	textarea {
-		width: 100%;
-		/* outline: 1px solid red; */
-		height: auto;
-		flex: 1;
-		background: transparent;
-		border: none;
-		color: #ccc;
-		font-size: var(--font-size-p);
-
-		padding: 16px 5px;
-		resize: none;
-	}
-
-	.char-counter {
-		position: absolute;
-		bottom: 5px;
-		right: 10px;
-		font-size: 12px;
-		color: #aaa;
-		padding: 2px 6px;
-		border-radius: 5px;
-	}
-
-	.char-limit {
-		color: var(--main-alert-color);
-		text-decoration: underline;
-	}
-
 	.error {
 		color: var(--main-alert-color);
 		padding: 10px 20px;
@@ -186,5 +119,32 @@
 		align-items: center;
 		justify-content: center;
 		background: linear-gradient(to right, rgb(229, 134, 19), rgb(30, 181, 158));
+	}
+
+	@media (max-width: 700px) {
+		.wrapper {
+			.gradient-border {
+				width: 100%;
+			}
+		}
+	}
+
+	@media (max-width: 600px) {
+		.gradient-border {
+			.container {
+				flex-direction: column;
+				align-items: center;
+				gap: 0.2rem;
+				min-height: 35vh;
+			}
+		}
+		.svg-icon {
+			display: none;
+		}
+
+		:global(.async-button) {
+			width: 100%;
+			margin-bottom: 5px;
+		}
 	}
 </style>

@@ -19,16 +19,15 @@
 		<h1>Sprawdź sentyment swojego tekstu online</h1>
 		<h2>Analizuj emocje wprowadzonych zdań</h2>
 		<TextAnalysis onResult={(data) => openResultModal(data)} />
-		<!-- <button onclick={() => openResultModal(SENTIMENT_ANALYSIS_MOCK)}>modal</button> -->
 	</div>
 </div>
 
 <style lang="scss">
 	.wrapper {
+		/* outline: 1px solid red; */
 		height: 100%;
 		margin: auto;
 		padding-top: 29vh;
-
 		h1 {
 			font-family: 'Playfair Display', serif;
 		}
@@ -50,5 +49,17 @@
 		align-items: center;
 		text-align: center;
 		gap: 2rem;
+		@media (max-width: 700px) {
+			padding: 4rem 1.4rem 3rem 1.4rem;
+		}
+	}
+
+	@media (max-width: 600px) {
+		.wrapper {
+			padding-top: 1vh;
+		}
+		.container {
+			padding: 1rem 1.4rem 3rem 1.4rem;
+		}
 	}
 </style>
