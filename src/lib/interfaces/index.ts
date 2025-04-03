@@ -15,3 +15,14 @@ export interface AnalysisResultDesc {
 	title: string;
 	desc: string;
 }
+
+export enum ResultCategoryEnum {
+	Good = 'good',
+	Neutral = 'neutral',
+	Bad = 'bad'
+}
+
+export interface SentimentAnalysis {
+	resultCategory: ResultCategoryEnum;
+	score: string;
+}

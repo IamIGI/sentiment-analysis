@@ -1,14 +1,15 @@
 <script lang="ts">
 	import ResultModal from '$lib/components/resultModal.svelte';
 	import TextAnalysis from '$lib/components/textAnalysis.svelte';
+	import type { SentimentAnalysis } from '$lib/interfaces';
 	import { mount, unmount } from 'svelte';
 
-	const openModal = () => {
+	const openResultModal = (data: SentimentAnalysis) => {
 		const closeModal = () => unmount(m);
 
 		const m = mount(ResultModal, {
 			target: document.body,
-			props: { result: 'neutral', closeModal }
+			props: { result: data.resultCategory, score: data.score, onModalClose: closeModal }
 		});
 	};
 </script>
@@ -17,8 +18,8 @@
 	<div class="container">
 		<h1>Sprawdź sentyment swojego tekstu online</h1>
 		<h2>Analizuj emocje wprowadzonych zdań</h2>
-		<TextAnalysis />
-		<button onclick={openModal}>modal</button>
+		<TextAnalysis onResult={(data) => openResultModal(data)} />
+		<!-- <button onclick={() => openResultModal(SENTIMENT_ANALYSIS_MOCK)}>modal</button> -->
 	</div>
 </div>
 

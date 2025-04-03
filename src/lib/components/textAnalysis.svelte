@@ -1,30 +1,44 @@
 <script lang="ts">
 	import { base } from '$app/paths';
 	import apiConfig from '$lib/api/api.config';
-	import type { SentimentError, SentimentResponse } from '$lib/interfaces';
+	import type { SentimentAnalysis, SentimentError, SentimentResponse } from '$lib/interfaces';
 	import appUtils from '$lib/utils/app.utils';
 	import AsyncButton from './asyncButton.svelte';
 
+	interface Props {
+		onResult: (data: SentimentAnalysis) => void;
+	}
+	let { onResult }: Props = $props();
+
 	let text = $state<string>();
-	let result = $state<string>();
+	let error = $state<string>();
 	let isLoading = $state<boolean>(false);
 
 	const submit = async () => {
 		if (!text) return;
+		isLoading = true;
 		const response = await apiConfig.submitSentiment(text);
 
 		if ((response as SentimentError).error) {
-			result = (response as SentimentError).error;
+			error = (response as SentimentError).error;
+		} else {
+			const sentimentAnalysis = appUtils.getSentimentAnalysis(response as SentimentResponse);
+			onResult(sentimentAnalysis);
 		}
 
-		result = appUtils.getSentimentAnalysis(response as SentimentResponse);
+		isLoading = false;
 	};
 </script>
 
 <div class="border-wrapper">
 	<div class="container">
 		<img src={`${base}/svg/analysis.svg`} alt="analysis" class="svg-icon" />
-		<input type="text" bind:value={text} placeholder="Wprowadź tekst, sprawdź emocje" />
+		<input
+			type="text"
+			placeholder="Wprowadź tekst, sprawdź emocje"
+			bind:value={text}
+			onkeydown={(e) => e.key === 'Enter' && submit()}
+		/>
 		<AsyncButton {isLoading} class="async-button" onclick={submit}>Analizuj</AsyncButton>
 	</div>
 </div>

@@ -2,25 +2,26 @@
 	import { base } from '$app/paths';
 
 	import Modal from './modal.svelte';
-	import type { AnalysisResultDesc } from '$lib/interfaces';
+	import type { AnalysisResultDesc, ResultCategoryEnum } from '$lib/interfaces';
 	import textAnalysisResults from '$lib/constants/textAnalysisResults';
 	import { onDestroy, onMount } from 'svelte';
 	import { scale } from 'svelte/transition';
 
 	interface Props {
-		result: 'good' | 'bad' | 'neutral';
-		closeModal: () => void;
+		result: ResultCategoryEnum;
+		score: string;
+		onModalClose: () => void;
 	}
+	let { result, score, onModalClose }: Props = $props();
 
 	const MOUNT_DURATION = 700;
-	let { result, closeModal }: Props = $props();
 	let analysisResultDesc = $state<AnalysisResultDesc>(textAnalysisResults[result]);
 	let modalRef = $state<HTMLElement | null>(null);
 	let onMountTimer = $state<NodeJS.Timeout>();
 
 	function handleClickOutside(event: MouseEvent) {
 		if (modalRef && !modalRef.contains(event.target as Node)) {
-			closeModal();
+			onModalClose();
 		}
 	}
 
@@ -48,12 +49,13 @@
 
 			<div class="result">
 				<img src={`${base}/svg/${analysisResultDesc.iconName}`} alt="result" class="svg-icon" />
-				<div>
+				<div class="result-desc">
 					<h2 style="color: {analysisResultDesc.color}">{analysisResultDesc.title}</h2>
+					<p>Wynik: <span style="color: {analysisResultDesc.color}">{score}</span></p>
 					<p>{@html analysisResultDesc.desc}</p>
 				</div>
 			</div>
-			<button onclick={closeModal}>Ok</button>
+			<button onclick={onModalClose}>Ok</button>
 		</div>
 	</div>
 </Modal>
@@ -61,7 +63,7 @@
 <style lang="scss">
 	$borderRadius: 5px;
 	$width: 650px;
-	$height: 320px;
+	$height: 350px;
 	$border: 5px;
 	$backgroundGradient: linear-gradient(to right, rgb(229, 134, 19), rgb(30, 181, 158));
 
@@ -97,6 +99,16 @@
 		margin: 1rem 0;
 		display: flex;
 		gap: 2rem;
+
+		.result-desc {
+			p {
+				margin: 5px 0;
+
+				&:first-of-type {
+					font-weight: 700;
+				}
+			}
+		}
 	}
 
 	.svg-icon {
