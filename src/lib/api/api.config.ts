@@ -25,7 +25,7 @@ async function submitSentiment(text: string): Promise<SentimentResponse | Sentim
 		}
 
 		return {
-			error: 'Failed to fetch sentiment result'
+			error: 'Pobranie analizy sentymentu zakończone nie powodzeniem.'
 		};
 	}
 }

@@ -10,8 +10,8 @@
 	}
 	let { onResult }: Props = $props();
 
-	let text = $state<string>();
-	let error = $state<string>();
+	let text = $state<string>('');
+	let error = $state<string>('');
 	let isLoading = $state<boolean>(false);
 
 	const submit = async () => {
@@ -20,31 +20,55 @@
 		const response = await apiConfig.submitSentiment(text);
 
 		if ((response as SentimentError).error) {
+			//error
 			error = (response as SentimentError).error;
 		} else {
+			//success
+			text = '';
 			const sentimentAnalysis = appUtils.getSentimentAnalysis(response as SentimentResponse);
 			onResult(sentimentAnalysis);
 		}
-
 		isLoading = false;
 	};
 </script>
 
-<div class="border-wrapper">
-	<div class="container">
-		<img src={`${base}/svg/analysis.svg`} alt="analysis" class="svg-icon" />
-		<input
-			type="text"
-			placeholder="Wprowadź tekst, sprawdź emocje"
-			bind:value={text}
-			onkeydown={(e) => e.key === 'Enter' && submit()}
-		/>
-		<AsyncButton {isLoading} class="async-button" onclick={submit}>Analizuj</AsyncButton>
+<div class="wrapper">
+	<div class="gradient-border">
+		<div class="container">
+			<img src={`${base}/svg/analysis.svg`} alt="analysis" class="svg-icon" />
+			<input
+				type="text"
+				placeholder="Wprowadź tekst, sprawdź emocje"
+				bind:value={text}
+				oninput={() => {
+					if (error.length > 0) error = '';
+				}}
+				onkeydown={(e) => e.key === 'Enter' && submit()}
+			/>
+			<AsyncButton
+				{isLoading}
+				class="async-button"
+				onclick={submit}
+				disabled={text.length === 0 || text.length > 500}>Analizuj</AsyncButton
+			>
+		</div>
 	</div>
+	{#if error.length > 0}
+		<p class="error">{error}</p>
+	{/if}
 </div>
 
 <style lang="scss">
-	.border-wrapper {
+	.wrapper {
+		width: 100%;
+		/* outline: 1px solid red; */
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		gap: 1rem;
+	}
+	.gradient-border {
 		$borderRadius: 15px;
 		background: linear-gradient(to right, white, rgba(32, 32, 32));
 		border-radius: $borderRadius;
@@ -80,6 +104,14 @@
 		color: #ccc;
 		font-size: var(--font-size-p);
 		padding-right: 5px;
+	}
+
+	.error {
+		color: var(--main-alert-color);
+		/* background-color: var(--main-second-text-color); */
+		padding: 10px 20px;
+		border-radius: 10px;
+		font-weight: 700;
 	}
 
 	:global(.async-button) {
