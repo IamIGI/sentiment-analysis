@@ -13,6 +13,7 @@
 	let text = $state<string>('');
 	let error = $state<string>('');
 	let isLoading = $state<boolean>(false);
+	let textAreaRef = $state<HTMLTextAreaElement>();
 
 	const submit = async () => {
 		if (!text) return;
@@ -30,21 +31,51 @@
 		}
 		isLoading = false;
 	};
+
+	const adjustHeight = () => {
+		if (!textAreaRef) return;
+		textAreaRef.style.height = 'auto'; // Reset height to auto to allow for re-calculation
+		textAreaRef.style.height = `${textAreaRef.scrollHeight}px`; // Set the height based on scrollHeight
+	};
+
+	const trimExtraCharacters = () => {
+		if (text.length > 500) {
+			text = text.slice(0, 500); // Trim extra characters
+		}
+	};
+	const removeErrorMsg = () => {
+		if (error.length > 0) error = '';
+	};
 </script>
 
 <div class="wrapper">
 	<div class="gradient-border">
 		<div class="container">
 			<img src={`${base}/svg/analysis.svg`} alt="analysis" class="svg-icon" />
-			<input
-				type="text"
-				placeholder="Wprowadź tekst, sprawdź emocje"
-				bind:value={text}
-				oninput={() => {
-					if (error.length > 0) error = '';
-				}}
-				onkeydown={(e) => e.key === 'Enter' && submit()}
-			/>
+
+			<div class="textarea-wrapper">
+				<textarea
+					placeholder="Wprowadź tekst, sprawdź emocje"
+					bind:this={textAreaRef}
+					bind:value={text}
+					oninput={() => {
+						removeErrorMsg();
+						trimExtraCharacters();
+						adjustHeight();
+					}}
+					onkeydown={(e) => {
+						if (e.key === 'Enter') {
+							if (e.shiftKey) return;
+							// Enter alone = Submit
+							e.preventDefault();
+							submit();
+						}
+					}}
+				>
+				</textarea>
+				<span class="char-counter" class:char-limit={text.length === 500}>{text.length} / 500</span>
+			</div>
+
 			<AsyncButton
 				{isLoading}
 				class="async-button"
@@ -77,14 +108,16 @@
 		width: 80%;
 
 		.container {
+			/* outline: 1px solid red; */
 			width: 100%;
-			height: 60px;
+			height: 100%;
+			min-height: 70px;
 			display: flex;
-			align-items: center;
+			align-items: flex-end;
 			gap: 1rem;
 			background: var(--main-input-color);
 			border-radius: calc($borderRadius + 1px);
-			padding: 0 15px;
+			padding: 6px 15px;
 			color: #fff;
 			background-clip: padding-box;
 			border: solid 1px transparent;
@@ -92,40 +125,66 @@
 	}
 
 	.svg-icon {
+		margin-bottom: 20px;
 		$size: 45px;
 		height: $size;
 		width: $size;
 	}
-	input {
-		height: 100%;
+
+	.textarea-wrapper {
+		/* outline: 1px solid blue; */
+		position: relative;
+		width: 100%;
+	}
+
+	textarea {
+		width: 100%;
+		/* outline: 1px solid red; */
+		height: auto;
 		flex: 1;
 		background: transparent;
 		border: none;
 		color: #ccc;
 		font-size: var(--font-size-p);
-		padding-right: 5px;
+
+		padding: 16px 5px;
+		resize: none;
+	}
+
+	.char-counter {
+		position: absolute;
+		bottom: 5px;
+		right: 10px;
+		font-size: 12px;
+		color: #aaa;
+		padding: 2px 6px;
+		border-radius: 5px;
+	}
+
+	.char-limit {
+		color: var(--main-alert-color);
+		text-decoration: underline;
 	}
 
 	.error {
 		color: var(--main-alert-color);
-		/* background-color: var(--main-second-text-color); */
 		padding: 10px 20px;
 		border-radius: 10px;
 		font-weight: 700;
 	}
 
 	:global(.async-button) {
-		height: 70%;
+		height: 42px;
 		min-width: 100px;
 		font-size: 17px;
 		font-weight: 700;
 		letter-spacing: 0.3px;
 		padding: 0 15px;
+		margin-bottom: 20px;
 		border-radius: 14px;
 		display: flex;
 		align-items: center;
 		justify-content: center;
 		background: linear-gradient(to right, rgb(229, 134, 19), rgb(30, 181, 158));
-		/* filter: brightness(0.9); */
 	}
 </style>
