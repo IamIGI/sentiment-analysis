@@ -1,4 +1,4 @@
-import AsyncButton from '../lib/components/asyncButton.svelte';
+import AsyncButton from '$lib/components/asyncButton.svelte';
 import { afterEach, describe, expect, test } from 'vitest';
 import { createRawSnippet, type Snippet } from 'svelte';
 import { cleanup, render, screen } from '@testing-library/svelte';
@@ -23,7 +23,7 @@ const setup = (
 
 describe('AsyncButton Component', () => {
 	afterEach(() => {
-		cleanup(); // Automatically cleans up after each test, preventing memory leaks
+		cleanup();
 	});
 	test('to be rendered', async () => {
 		setup();
@@ -35,7 +35,9 @@ describe('AsyncButton Component', () => {
 		setup();
 
 		// Check if the children content is rendered
-		expect(screen.getByText('Click me')).toBeInTheDocument();
+		const children = screen.getByText('Click me');
+
+		expect(children).toBeInTheDocument();
 	});
 
 	test('shows loading spinner when isLoading is true', async () => {
@@ -43,6 +45,7 @@ describe('AsyncButton Component', () => {
 
 		// Check if the loader spinner is in the document
 		const loader = container.querySelector('.loader-spinner');
+
 		expect(loader).toBeInTheDocument();
 	});
 
@@ -51,6 +54,7 @@ describe('AsyncButton Component', () => {
 
 		// Check if the children text is not present when loading
 		const childrenText = screen.queryByText('Click me');
+
 		expect(childrenText).not.toBeInTheDocument();
 	});
 	test('passes AsyncButton props correctly', async () => {
@@ -58,6 +62,7 @@ describe('AsyncButton Component', () => {
 
 		// Check if the button has the correct type attribute
 		const button = screen.getByRole('button');
+
 		expect(button).toHaveAttribute('type', 'submit');
 	});
 });
