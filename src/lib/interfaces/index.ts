@@ -22,7 +22,7 @@ export enum ResultCategoryEnum {
 	Bad = 'bad'
 }
 
-export interface SentimentAnalysis {
+export interface SentimentAnalysisResult {
 	resultCategory: ResultCategoryEnum;
 	score: string;
 }

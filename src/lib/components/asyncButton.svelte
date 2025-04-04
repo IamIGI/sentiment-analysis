@@ -7,7 +7,7 @@
 	let { isLoading, children, ...restProps }: Props = $props();
 </script>
 
-<button {...restProps}>
+<button data-testid="asyncButton" {...restProps}>
 	{#if isLoading}
 		<div class="loader-spinner"></div>
 	{:else}

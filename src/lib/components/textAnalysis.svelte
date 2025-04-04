@@ -1,13 +1,14 @@
 <script lang="ts">
 	import { base } from '$app/paths';
 	import apiConfig from '$lib/api/api.config';
-	import type { SentimentAnalysis, SentimentError, SentimentResponse } from '$lib/interfaces';
+	import type { SentimentAnalysisResult, SentimentError, SentimentResponse } from '$lib/interfaces';
 	import appUtils from '$lib/utils/app.utils';
+	import { onMount } from 'svelte';
 	import AsyncButton from './asyncButton.svelte';
 	import CustomTextarea from './customTextarea.svelte';
 
 	interface Props {
-		onResult: (data: SentimentAnalysis) => void;
+		onResult: (data: SentimentAnalysisResult) => void;
 	}
 	let { onResult }: Props = $props();
 
@@ -27,8 +28,8 @@
 		} else {
 			//success
 			text = '';
-			const sentimentAnalysis = appUtils.getSentimentAnalysis(response as SentimentResponse);
-			onResult(sentimentAnalysis);
+			const SentimentAnalysisResult = appUtils.getSentimentAnalysis(response as SentimentResponse);
+			onResult(SentimentAnalysisResult);
 		}
 		isLoading = false;
 	};
@@ -39,11 +40,11 @@
 	};
 </script>
 
-<div class="wrapper">
+<div data-testid="textAnalysis" class="wrapper">
 	<div class="gradient-border">
 		<div class="container">
 			<img src={`${base}/svg/analysis.svg`} alt="analysis" class="svg-icon" />
-			<CustomTextarea onTextChange={onTextUpdate} onSubmit={submit} />
+			<CustomTextarea {text} onTextChange={onTextUpdate} onSubmit={submit} />
 			<AsyncButton
 				{isLoading}
 				class="async-button"

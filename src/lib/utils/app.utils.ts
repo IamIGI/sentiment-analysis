@@ -1,11 +1,11 @@
 import {
 	ResultCategoryEnum,
-	type SentimentAnalysis,
+	type SentimentAnalysisResult,
 	type SentimentResponse
 } from '$lib/interfaces';
 
 export default {
-	getSentimentAnalysis: (data: SentimentResponse): SentimentAnalysis => {
+	getSentimentAnalysis: (data: SentimentResponse): SentimentAnalysisResult => {
 		const borderScore = 0.65;
 		const sentimentScores = data[0];
 

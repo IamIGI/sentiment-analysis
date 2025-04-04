@@ -1,12 +1,12 @@
 <script lang="ts">
-	let text = $state<string>('');
-	let textAreaRef = $state<HTMLTextAreaElement>();
-
 	interface Props {
-		onTextChange: (text: string) => void;
+		text: string;
 		onSubmit: () => void;
+		onTextChange: (text: string) => void;
 	}
-	let { onSubmit, onTextChange }: Props = $props();
+	let { text, onSubmit, onTextChange }: Props = $props();
+
+	let textAreaRef = $state<HTMLTextAreaElement>();
 
 	const adjustHeight = () => {
 		if (!textAreaRef) return;
@@ -36,6 +36,7 @@
 
 <div class="textarea-wrapper">
 	<textarea
+		data-testid="customTextarea"
 		placeholder="Wprowadź tekst, sprawdź emocje"
 		bind:this={textAreaRef}
 		bind:value={text}
