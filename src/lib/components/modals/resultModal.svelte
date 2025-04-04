@@ -83,7 +83,6 @@
 
 	.border-wrapper {
 		background: $backgroundGradient;
-
 		border-radius: $borderRadius;
 		width: $width;
 		height: $height;
@@ -101,7 +100,6 @@
 			display: flex;
 			flex-direction: column;
 			align-items: center;
-
 			.title {
 				font-family: 'Playfair Display', serif;
 			}
@@ -109,7 +107,6 @@
 	}
 
 	.result {
-		/* outline: 1px solid red; */
 		margin: 1rem 0;
 		display: flex;
 		gap: 2rem;
