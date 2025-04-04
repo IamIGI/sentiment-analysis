@@ -52,9 +52,5 @@
 		&::-webkit-media-controls-fullscreen-button {
 			display: none;
 		}
-
-		@media (max-width: 550px) {
-			filter: brightness(0.9);
-		}
 	}
 </style>
