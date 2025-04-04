@@ -1,7 +1,8 @@
 import AsyncButton from '../lib/components/asyncButton.svelte';
 import { afterEach, describe, expect, test } from 'vitest';
-import { createRawSnippet } from 'svelte';
-import { cleanup, render } from '@testing-library/svelte';
+import { createRawSnippet, type Snippet } from 'svelte';
+import { cleanup, render, screen } from '@testing-library/svelte';
+import type { HTMLButtonAttributes } from 'svelte/elements';
 
 const childrenComponent = () => ({
 	render() {
@@ -9,31 +10,36 @@ const childrenComponent = () => ({
 	}
 });
 const snippet = createRawSnippet(childrenComponent);
+const setup = (
+	props: { isLoading: boolean; children?: Snippet<[]> } & Partial<HTMLButtonAttributes> = {
+		isLoading: false,
+		children: snippet
+	}
+) => {
+	return render(AsyncButton, {
+		props
+	});
+};
 
 describe('AsyncButton Component', () => {
 	afterEach(() => {
 		cleanup(); // Automatically cleans up after each test, preventing memory leaks
 	});
 	test('to be rendered', async () => {
-		const { getByRole } = render(AsyncButton, { props: { isLoading: false } });
+		setup();
 
-		// Check if button is in the document
-		const button = getByRole('button');
+		const button = screen.getByRole('button');
 		expect(button).toBeInTheDocument();
 	});
 	test('renders children when not loading', async () => {
-		const { getByText } = render(AsyncButton, {
-			props: { isLoading: false, children: snippet }
-		});
+		setup();
 
 		// Check if the children content is rendered
-		expect(getByText('Click me')).toBeInTheDocument();
+		expect(screen.getByText('Click me')).toBeInTheDocument();
 	});
 
 	test('shows loading spinner when isLoading is true', async () => {
-		const { container } = render(AsyncButton, {
-			props: { isLoading: true, children: snippet }
-		});
+		const { container } = setup({ isLoading: true });
 
 		// Check if the loader spinner is in the document
 		const loader = container.querySelector('.loader-spinner');
@@ -41,21 +47,17 @@ describe('AsyncButton Component', () => {
 	});
 
 	test('does not show children when loading', async () => {
-		const { queryByText } = render(AsyncButton, {
-			props: { isLoading: true, children: snippet }
-		});
+		setup({ isLoading: true });
 
 		// Check if the children text is not present when loading
-		const childrenText = queryByText('Click me');
+		const childrenText = screen.queryByText('Click me');
 		expect(childrenText).not.toBeInTheDocument();
 	});
 	test('passes AsyncButton props correctly', async () => {
-		const { getByRole } = render(AsyncButton, {
-			props: { isLoading: false, children: snippet, type: 'submit' }
-		});
+		setup({ isLoading: false, type: 'submit' });
 
 		// Check if the button has the correct type attribute
-		const button = getByRole('button');
+		const button = screen.getByRole('button');
 		expect(button).toHaveAttribute('type', 'submit');
 	});
 });
