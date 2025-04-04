@@ -1,4 +1,4 @@
-import AsyncButton from '$lib/components/asyncButton.svelte';
+import AsyncButton from '$lib/components/ui/asyncButton.svelte';
 import { afterEach, describe, expect, test } from 'vitest';
 import { createRawSnippet, type Snippet } from 'svelte';
 import { cleanup, render, screen } from '@testing-library/svelte';

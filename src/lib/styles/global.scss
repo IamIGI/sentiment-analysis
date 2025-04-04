@@ -42,23 +42,6 @@ video {
 	display: block;
 }
 
-/* Remove default list styles */
-ul,
-ol {
-	padding: 0;
-	list-style: none;
-}
-
-/* Remove link underlines */
-a {
-	text-decoration: none;
-	color: inherit;
-
-	&:hover {
-		text-decoration: underline;
-	}
-}
-
 h1 {
 	font-size: var(--font-size-h1);
 	margin: 0;

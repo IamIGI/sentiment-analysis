@@ -1,4 +1,4 @@
-import Modal from '$lib/components/modal.svelte';
+import Modal from '$lib/components/modals/modal.svelte';
 import { cleanup, render, screen } from '@testing-library/svelte';
 import { createRawSnippet, type Snippet } from 'svelte';
 import { afterEach, describe, expect, test } from 'vitest';
