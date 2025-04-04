@@ -1,5 +1,5 @@
 <script lang="ts">
-	import ResultModal from '$lib/components/resultModal.svelte';
+	import ResultModal from '$lib/components/modals/resultModal.svelte';
 	import TextAnalysis from '$lib/components/textAnalysis.svelte';
 	import type { SentimentAnalysisResult } from '$lib/interfaces';
 	import { mount, unmount } from 'svelte';
@@ -35,9 +35,8 @@
 
 	.container {
 		/* outline: 1px solid red; */
-
 		$backgroundColor: rgba(black, 0.7);
-		$backgroundColor: rgba(rgb(12, 12, 12), 0.7);
+		$backgroundColor: rgba(rgb(7, 7, 7), 0.7);
 		background-color: $backgroundColor;
 		box-shadow: 0 0 7rem 8rem $backgroundColor;
 		border-radius: 3rem;

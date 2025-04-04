@@ -3,9 +3,8 @@
 	import apiConfig from '$lib/api/api.config';
 	import type { SentimentAnalysisResult, SentimentError, SentimentResponse } from '$lib/interfaces';
 	import appUtils from '$lib/utils/app.utils';
-	import { onMount } from 'svelte';
-	import AsyncButton from './asyncButton.svelte';
-	import CustomTextarea from './customTextarea.svelte';
+	import AsyncButton from './ui/asyncButton.svelte';
+	import CustomTextarea from './ui/customTextarea.svelte';
 
 	interface Props {
 		onResult: (data: SentimentAnalysisResult) => void;

@@ -1,8 +1,8 @@
 import { render, screen, fireEvent, waitFor, cleanup } from '@testing-library/svelte';
 import { describe, test, expect, vi } from 'vitest';
-import ResultModal from '$lib/components/resultModal.svelte';
 import { ResultCategoryEnum } from '$lib/interfaces';
 import { afterEach } from 'node:test';
+import ResultModal from '$lib/components/modals/resultModal.svelte';
 
 const mockClose = vi.fn();
 const setup = (

@@ -1,4 +1,4 @@
-import CustomTextarea from '$lib/components/customTextarea.svelte';
+import CustomTextarea from '$lib/components/ui/customTextarea.svelte';
 import { cleanup, render, screen, fireEvent } from '@testing-library/svelte';
 import { afterEach, describe, expect, test, vi } from 'vitest';
 
