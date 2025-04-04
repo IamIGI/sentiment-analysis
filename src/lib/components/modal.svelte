@@ -2,7 +2,7 @@
 	let { children } = $props();
 </script>
 
-<div class="modal">
+<div data-testid="modal" class="modal">
 	<!-- remove box shadow when background color is transparent -->
 	<div class="modal-content">
 		{@render children()}

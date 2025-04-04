@@ -1,11 +1,11 @@
 <script lang="ts">
 	interface Props {
+		text: string;
 		onSubmit: () => void;
 		onTextChange: (text: string) => void;
 	}
-	let { onSubmit, onTextChange }: Props = $props();
+	let { text, onSubmit, onTextChange }: Props = $props();
 
-	let text = $state<string>('');
 	let textAreaRef = $state<HTMLTextAreaElement>();
 
 	const adjustHeight = () => {

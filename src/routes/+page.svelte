@@ -1,10 +1,10 @@
 <script lang="ts">
 	import ResultModal from '$lib/components/resultModal.svelte';
 	import TextAnalysis from '$lib/components/textAnalysis.svelte';
-	import type { SentimentAnalysis } from '$lib/interfaces';
+	import type { SentimentAnalysisResult } from '$lib/interfaces';
 	import { mount, unmount } from 'svelte';
 
-	const openResultModal = (data: SentimentAnalysis) => {
+	const openResultModal = (data: SentimentAnalysisResult) => {
 		const closeModal = () => unmount(resultModal);
 
 		const resultModal = mount(ResultModal, {

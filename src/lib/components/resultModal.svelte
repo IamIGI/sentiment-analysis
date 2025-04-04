@@ -46,6 +46,7 @@
 
 <Modal>
 	<div
+		data-testid="resultModal"
 		class="border-wrapper"
 		bind:this={modalRef}
 		transition:scale={{ start: 2, duration: MOUNT_DURATION }}

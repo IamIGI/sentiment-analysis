@@ -3,7 +3,8 @@ import { cleanup, render, screen, fireEvent } from '@testing-library/svelte';
 import { afterEach, describe, expect, test, vi } from 'vitest';
 
 const setup = (
-	props: { onSubmit: () => void; onTextChange: (text: string) => void } = {
+	props: { text: string; onSubmit: () => void; onTextChange: (text: string) => void } = {
+		text: '',
 		onSubmit: () => {},
 		onTextChange: (text: string) => console.log(text || 'testText')
 	}
@@ -46,7 +47,7 @@ describe('CustomTextArea Component', () => {
 
 	test('calls onTextChange when input changes', async () => {
 		const onTextChange = vi.fn();
-		setup({ onSubmit: () => {}, onTextChange });
+		setup({ text: '', onSubmit: () => {}, onTextChange });
 
 		const textarea = screen.getByTestId('customTextarea');
 		await fireEvent.input(textarea, { target: { value: 'New text' } });
@@ -56,7 +57,7 @@ describe('CustomTextArea Component', () => {
 
 	test('calls onSubmit when Enter is pressed (without Shift)', async () => {
 		const onSubmit = vi.fn();
-		setup({ onSubmit, onTextChange: () => {} });
+		setup({ text: '', onSubmit, onTextChange: () => {} });
 
 		const textarea = screen.getByTestId('customTextarea');
 		await fireEvent.keyDown(textarea, { key: 'Enter', shiftKey: false });
@@ -66,7 +67,7 @@ describe('CustomTextArea Component', () => {
 
 	test('does not call onSubmit when Shift + Enter is pressed', async () => {
 		const onSubmit = vi.fn();
-		setup({ onSubmit, onTextChange: () => {} });
+		setup({ text: '', onSubmit, onTextChange: () => {} });
 
 		const textarea = screen.getByTestId('customTextarea');
 		await fireEvent.keyDown(textarea, { key: 'Enter', shiftKey: true });
