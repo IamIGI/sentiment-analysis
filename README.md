@@ -33,7 +33,7 @@ Aplikacja frontendowa do analizy sentymentu stworzona przy użyciu Svelte, TypeS
 3. Utwórz plik `.env` w katalogu głównym projektu i dodaj swój token API:
 
    ```
-   VITE_API_HUGGINGFACE_ACCESS_TOKEN=hf_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+   HUGGINGFACE_ACCESS_TOKEN=hf_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
    ```
 
 4. Aby uzyskać token:
@@ -64,10 +64,10 @@ Aplikacja frontendowa do analizy sentymentu stworzona przy użyciu Svelte, TypeS
    npm install
    ```
 
-3. Create a `.env` file and insert your Hugging Face token:
+3. Create a `.env` file in main project dictionary and insert your Hugging Face token:
 
    ```
-   VITE_API_HUGGINGFACE_ACCESS_TOKEN=hf_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+   HUGGINGFACE_ACCESS_TOKEN=hf_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
    ```
 
 4. To get the token:
@@ -98,16 +98,17 @@ Aplikacja frontendowa do analizy sentymentu stworzona przy użyciu Svelte, TypeS
 
 ### pl
 
-- 🇵🇱 _Z uwagi na prostotę aplikacji, sporo czasu poświęciłem na odpowiedni layout. Finalnie zdecydowałem się na nagranie w tel oraz gradientowy styl tła z zewnętrzną ramką aby przciągnąć uwagę w centrym aplikacji. Początkowa implementacja z użyciem `::before` nie działała poprawnie przy przezroczystym tle, dlatego użyłem dodatkowego kontenera. Na modalu wymagane było ustawienie wymiarów na sztywno czego nie jestem fanem... co skomplikowało RWD._
-- 🇵🇱 \_Odziwo pierwszy raz pracowałem z modalami w Svelte 5 – zauważyłem brak możliwości ich niszczenia przez `.destroy()`, jak w Svelte 4 co uważam za minus nowej wersji. Nowe podejście zarządzanie modalami oparte na callbackach przypomina mi React. Również przejście z `<slot />` na `@render children()` nie jest tak intuicyjne i szybkie jak w SVELTE.4, ale przynajmniej pozbyliśmy się `$` na rzecz `effect()`. 😊
+- 🇵🇱 _Z uwagi na prostotę aplikacji, sporo czasu poświęciłem na odpowiedni layout. Finalnie zdecydowałem się na nagranie wideo w tle oraz gradientowy styl tła z zewnętrzną ramką aby przciągnąć uwagę w centrum aplikacji. Początkowa implementacja ramki z gradientem z użyciem pseudoelementu `::before` nie działała poprawnie przy przezroczystym tle, dlatego użyłem dodatkowego kontenera. Wymagane było przez to ustawienie wymiarów okna modalnego na sztywno czego nie jestem fanem... co skomplikowało RWD._
+
+- 🇵🇱 Pierwszy raz pracowałem z oknami modalnymi w Svelte 5 – zauważyłem brak możliwości ich niszczenia przez `.destroy()`, tak jak w Svelte 4 co uważam za minus nowej wersji. Nowe podejście zarządzanie modalami oparte na callbackach przypomina mi React. Również użycie `@render children()` zamiast `<slot />` na  nie jest tak intuicyjne i szybkie jak w SVELTE.4, ale przynajmniej pozbyliśmy się `$` na rzecz `effect()`. 😊
 
 - 🇵🇱 _Konfiguracja Husky'ego była dla mnie nowością – wcześniej takie kontrole kodu mieliśmy ustawione tylko na pipeline'ach, lub projekt posiadał już skonfigurowanego husky-ego_
 
 - 🇵🇱 Z tego co przeczytałem w dokumentacji "Hugging Face", ich API nie posiada wsparcia dla GRAPHQL.
 
-- 🇵🇱 Dokumentacja wymagała aby przycisk wysłania formularza posiadał tekst "Analizuj", zatem język polski, to też poszedłem za ciosem i cała aplikacja posiada interfejs w języku polskim, jednak chciałbym zaznaczyć, że użyty LLM do analizy tekstu nie radzi sobie zbyt dobrze z frazami w jęzku polskim, przez co biłem się pare razy z myslami aby zmienić jednak język interfejsu na angielski... co by sugerował wpisywanie fraz właśnie w tym języku
+- 🇵🇱 Dokumentacja wymagała aby przycisk wysłania formularza posiadał tekst "Analizuj", zatem język polski. Poszedłem zatem za ciosem i cała aplikacja posiada interfejs w języku polskim, jednak chciałbym zaznaczyć, że użyty LLM do analizy tekstu nie radzi sobie zbyt dobrze z frazami w jęzku polskim, przez co biłem się parę razy z myślami aby zmienić jednak język interfejsu na angielski... co by sugerował wpisywanie fraz właśnie w tym języku
 
-- 🇵🇱 Przy nawiązywaniu połączeń po stronie klienta, token autoryzaycjny jest widoczy w nagłowkach, zatem zdecydowałem się na proxy - serwer svelte-a pośredniczy w żadaniu między klientem a API, dzieki temu token nie jest widoczny na zewnątrz.
+- 🇵🇱 Przy nawiązywaniu połączeń po stronie klienta, token autoryzacyjny jest widoczy w nagłówkach, zatem zdecydowałem się na proxy - serwer svelte-a pośredniczy w żadaniu między klientem a API, dzieki temu token nie jest widoczny na zewnątrz.
 
 ### eng
 
