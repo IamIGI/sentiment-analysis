@@ -103,9 +103,11 @@ Aplikacja frontendowa do analizy sentymentu stworzona przy użyciu Svelte, TypeS
 
 - 🇵🇱 _Konfiguracja Husky'ego była dla mnie nowością – wcześniej takie kontrole kodu mieliśmy ustawione tylko na pipeline'ach, lub projekt posiadał już skonfigurowanego husky-ego_
 
-- 🇵🇱 Z tego co przeczytałem w dokumentacji "Hugging Face", ich API nie posiada wsparcia dla GRAPHQL
+- 🇵🇱 Z tego co przeczytałem w dokumentacji "Hugging Face", ich API nie posiada wsparcia dla GRAPHQL.
 
-- 🇵🇱 Dokumentacja wymagała aby przycisk wysłania formularza był posiadał tekst "Analizuj", zatem język polskim, to też poszedłem za ciosem i cała aplikacja posiada interfejs w języku polskim, jednak chciałbym zaznaczyć, że użyty LLM do analizy tekstu nie radzi sobie zbyt dobrze z frazami w jęzku polskim, przez co biłem się pare razy z myslami aby zmienić jednak język interfejsu na angielski... co by sugerował wpisywanie fraz właśnie w tym języku
+- 🇵🇱 Dokumentacja wymagała aby przycisk wysłania formularza posiadał tekst "Analizuj", zatem język polski, to też poszedłem za ciosem i cała aplikacja posiada interfejs w języku polskim, jednak chciałbym zaznaczyć, że użyty LLM do analizy tekstu nie radzi sobie zbyt dobrze z frazami w jęzku polskim, przez co biłem się pare razy z myslami aby zmienić jednak język interfejsu na angielski... co by sugerował wpisywanie fraz właśnie w tym języku
+
+- 🇵🇱 Przy nawiązywaniu połączeń po stronie klienta, token autoryzaycjny jest widoczy w nagłowkach, zatem zdecydowałem się na proxy - serwer svelte-a pośredniczy w żadaniu między klientem a API, dzieki temu token nie jest widoczny na zewnątrz.
 
 ### eng
 
@@ -117,8 +119,9 @@ Aplikacja frontendowa do analizy sentymentu stworzona przy użyciu Svelte, TypeS
 
 - 🇬🇧 From what I read in the "Hugging Face" documentation, their API does not support GRAPHQL
 
-- 🇬🇧 The documentation required the form submission button to have the text "Analizuj", so the language was Polish, so I went with the flow and the entire application has an interface in Polish, but I would like to point out that the LLM used for text analysis does not cope very well with phrases in Polish, which is why I wrestled with the idea of ​​changing the interface language to English a few times... which would suggest entering phrases in that language.
+- 🇬🇧 The documentation required the form submission button to have the text "Analizuj", so the Polish language, so I went with the flow and the entire application has an interface in Polish, but I would like to point out that the LLM used for text analysis does not cope very well with phrases in Polish, which is why I wrestled with the idea of ​​changing the interface language to English a few times... which would suggest entering phrases in that language.
 
+- When establishing connections on the client side, the authorization token is visible in the headers, so I decided to use a proxy - the svelte server acts as an intermediary in the request between the client and the API, thanks to which the token is not visible to the outside.
 ---
 
 ## 📝 License
