@@ -1,27 +1,12 @@
-import envConstants from '$lib/constants/env.constants';
 import type { SentimentError, SentimentPayload, SentimentResponse } from '$lib/interfaces';
-
-const API_URL =
-	'https://api-inference.huggingface.co/models/distilbert-base-uncased-finetuned-sst-2-english';
-const ACCESS_TOKEN = envConstants.VITE_API_HUGGINGFACE_ACCESS_TOKEN;
-
-async function fetchWithAuth(endpoint: string, options: RequestInit = {}): Promise<Response> {
-	return fetch(endpoint, {
-		...options,
-		headers: {
-			Authorization: `Bearer ${ACCESS_TOKEN}`,
-			'Content-Type': 'application/json',
-			...options.headers
-		}
-	});
-}
 
 async function submitSentiment(text: string): Promise<SentimentResponse | SentimentError> {
 	const payload: SentimentPayload = { inputs: text };
 
 	try {
-		const response = await fetchWithAuth(API_URL, {
+		const response = await fetch('/api/sentiment', {
 			method: 'POST',
+			headers: { 'Content-Type': 'application/json' },
 			body: JSON.stringify(payload)
 		});
 

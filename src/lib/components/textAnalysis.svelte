@@ -1,8 +1,8 @@
 <script lang="ts">
 	import { base } from '$app/paths';
-	import apiConfig from '$lib/api/api.config';
 	import type { SentimentAnalysisResult, SentimentError, SentimentResponse } from '$lib/interfaces';
 	import appUtils from '$lib/utils/app.utils';
+	import apiConfig from '../api/api.config';
 	import AsyncButton from './ui/asyncButton.svelte';
 	import CustomTextarea from './ui/customTextarea.svelte';
 
