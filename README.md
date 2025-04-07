@@ -110,6 +110,8 @@ Aplikacja frontendowa do analizy sentymentu stworzona przy użyciu Svelte, TypeS
 
 - 🇵🇱 Przy nawiązywaniu połączeń po stronie klienta, token autoryzacyjny jest widoczy w nagłówkach, zatem zdecydowałem się na proxy - serwer svelte-a pośredniczy w żadaniu między klientem a API, dzieki temu token nie jest widoczny na zewnątrz.
 
+- 🇵🇱 W odróżnieniu od innych frameworków, Svelte oferuje bardzo szybkie, wbudowane i intuicyjne zarządzanie store'ami. Jednak w przypadku tak niewielkiej aplikacji, nie uważam, aby deklaracja store'a była konieczna.
+
 ### eng
 
 - 🇬🇧 Due to the simplicity of the application, I spent quite a bit of time crafting a compelling layout. I ultimately decided on using a recorded video and a gradient background with an outer frame to draw attention to the center of the app. My initial implementation using ::before didn't work well with a transparent background, so I opted for an extra container. For the modal, I had to hardcode the dimensions—which I'm not a fan of—which complicated responsive design.
@@ -122,7 +124,9 @@ Aplikacja frontendowa do analizy sentymentu stworzona przy użyciu Svelte, TypeS
 
 - 🇬🇧 The documentation required the form submission button to have the text "Analizuj", so the Polish language, so I went with the flow and the entire application has an interface in Polish, but I would like to point out that the LLM used for text analysis does not cope very well with phrases in Polish, which is why I wrestled with the idea of ​​changing the interface language to English a few times... which would suggest entering phrases in that language.
 
-- When establishing connections on the client side, the authorization token is visible in the headers, so I decided to use a proxy - the svelte server acts as an intermediary in the request between the client and the API, thanks to which the token is not visible to the outside.
+- 🇬🇧 When establishing connections on the client side, the authorization token is visible in the headers, so I decided to use a proxy - the svelte server acts as an intermediary in the request between the client and the API, thanks to which the token is not visible to the outside.
+
+- 🇬🇧 Unlike other frameworks, Svelte offers fast, built-in, and intuitive store management. However, for such a small application, I don't think it's necessary to declare a store.
 ---
 
 ## 📝 License
